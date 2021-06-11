@@ -2,13 +2,13 @@ teori = float(input("Masukkan nilai ujian teori : "))
 praktek = float(input("Masukkan nilai ujian praktek : "))
 
 if teori >= 7.0 and praktek >= 7.0:
-    print("SELAMAT ANDA LULUS!") #benar
+    print("SELAMAT ANDA LULUS!") 
 
-if praktek <= 7.0:
-    print("Anda harus mengulang ujian praktek.") #benar
+elif praktek <= 7.0 and teori >= 7.0:
+    print("Anda harus mengulang ujian praktek.") 
 
-if teori <= 7.0:
-    print("Anda harus mengulang ujian teori") #benar
+elif teori <= 7.0 and praktek >= 7.0:
+    print("Anda harus mengulang ujian teori") 
 
-if teori < 7.0 and praktek < 7.0:
+else:
     print("Anda harus mengulang ujian teori dan praktek.")
