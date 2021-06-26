@@ -1,22 +1,37 @@
-from email.mime.nonmultipart import MIMENonMultipart
 import smtplib
+from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from email.header import Header
+from email.mime.base import MIMEBase
+from email import encoders
 
-von = 'katnis.everdeen@gmail.com'
-zum = 'garykasparov@gmail.com'
+von = "nihawhp@gmail.com"
+with open('receiver.txt', 'r') as file:
+    zum = file.read().replace('\n', ',')
 
-msg = MIMENonMultipart()
+ 
+msg = MIMEMultipart()
+ 
 msg['From'] = von
-msg['to'] = zum 
-msg['Suject'] = "Enfolg beim Programmieren lernen"
-
-body = "Wie wir wissen, ist die Programmierung einer der ersten Schritte, um ein Gebäude wie ein solides Fundament zu starten.  Auch die Technologie wächst und erfordert, dass wir in der Lage sind, die Technologie zu beherrschen und uns mit ihr anzufreunden."
+msg['To'] = zum
+msg['Subject'] = "Greetings From ALTERSPACE-145GU21"
+ 
+body = "Hi, thank you so much for reading my email. I hope you are in good health and kept away from all bad things. Congratulations on your acceptance to become one of the leaders in the ALTER3675324 project this time. I hope we can work well together."
+ 
 msg.attach(MIMEText(body, 'plain'))
 
-server = smtplib.SMTP ('smpt.gmail.com', 587)
-server.starttls
-server.login(von, "okinawa92914")
+filename = "ThankYOU.jpg"
+attachment = open(r'C:\users\asus\Downloads\thankyou.jpg', 'rb')
+ 
+part = MIMEBase('application', 'octet-stream')
+part.set_payload((attachment).read())
+encoders.encode_base64(part)
+part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+ 
+msg.attach(part)
+ 
+server = smtplib.SMTP('smtp.gmail.com', 587)
+server.starttls()
+server.login(von, "xxxxxxxx")
 text = msg.as_string()
 server.sendmail(von, zum, text)
 server.quit()
